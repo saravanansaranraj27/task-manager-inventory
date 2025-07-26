@@ -1,0 +1,115 @@
+.admin-panel {
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 2rem auto;
+  color: #1e293b;
+}
+
+body.dark .admin-panel {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
+.admin-panel h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.admin-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.admin-form input {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: inherit;
+  color: inherit;
+}
+
+body.dark .admin-form input {
+  background: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #475569;
+}
+
+.admin-form button {
+  padding: 0.6rem 1rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-form button:hover {
+  background: #1e40af;
+}
+
+.manager-list {
+  list-style: none;
+  padding: 0;
+}
+
+.manager-item {
+  background: #f1f5f9;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+  color: #1e293b;
+}
+
+body.dark .manager-item {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+.manager-item input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: inherit;
+  color: inherit;
+}
+
+body.dark .manager-item input {
+  background: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #475569;
+}
+
+.manager-item button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.manager-item button:hover {
+  background: #1e40af;
+}
+
+.manager-item button:nth-child(4),
+.manager-item .delete-button {
+  background: #dc2626;
+}
+
+.manager-item button:nth-child(4):hover,
+.manager-item .delete-button:hover {
+  background: #b91c1c;
+}
