@@ -57,10 +57,27 @@ function Login() {
         required
       />
       {isSignup && (
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="manager">Manager</option>
-          <option value="admin">Admin</option>
-        </select>
+        <div className="signup-role" aria-label="Choose account role">
+          <p>Sign up separately as</p>
+          <div className="signup-role-options">
+            <button
+              type="button"
+              className={role === "admin" ? "selected" : ""}
+              onClick={() => setRole("admin")}
+              aria-pressed={role === "admin"}
+            >
+              Admin
+            </button>
+            <button
+              type="button"
+              className={role === "manager" ? "selected" : ""}
+              onClick={() => setRole("manager")}
+              aria-pressed={role === "manager"}
+            >
+              Manager
+            </button>
+          </div>
+        </div>
       )}
       <button type="submit">{isSignup ? "Sign Up" : "Login"}</button>
 

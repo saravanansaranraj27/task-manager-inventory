@@ -60,7 +60,10 @@ function Navbar({ showMinimal = false }) {
           className="theme-toggle"
           aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
         >
-          {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          <span className="theme-icon" aria-hidden="true">
+            {theme === "light" ? "☾" : "☀"}
+          </span>
+          {theme === "light" ? " Dark" : " Light"}
         </button>
 
         {user && (

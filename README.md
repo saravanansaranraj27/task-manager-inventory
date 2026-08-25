@@ -6,13 +6,12 @@
 [![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0f766e.svg)](#license)
 
-Task Manager is a responsive React application built for small teams that need a simple way to plan work and manage inventory. It uses role-based access control and browser storage, so it works without a backend or account setup.
+Task Manager is a responsive React application for small teams that need a simple way to plan work and manage shared equipment. It includes personal task boards, an inventory catalogue, account settings, and an admin area for managing manager access. The app uses React Context and browser storage, so it runs locally without a backend.
 
 ## Contents
 
-- [What is included](#what-is-included)
-- [UI highlights](#ui-highlights)
-- [Roles](#roles)
+- [Features](#features)
+- [Roles and permissions](#roles-and-permissions)
 - [Quick start](#quick-start)
 - [Using the app](#using-the-app)
 - [Routes](#routes)
@@ -23,31 +22,22 @@ Task Manager is a responsive React application built for small teams that need a
 - [Contributing](#contributing)
 - [License](#license)
 
-## What is included
+## Features
 
-| Area        | Capabilities                                                                                   |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| Tasks       | Create, edit, complete, and remove tasks with due dates, types, and priorities                 |
-| Inventory   | Search by name or category, filter results, track quantities, and manage categories            |
-| Accounts    | Sign up, log in, update passwords, and log out                                                 |
-| Permissions | Admin, manager, and user roles with protected routes                                           |
-| Experience  | Responsive layouts, persistent light/dark mode, keyboard-friendly controls, and task summaries |
+| Area           | Capabilities                                                                                 |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| Tasks          | Create, edit, complete, and delete personal tasks with due dates, task types, and priorities |
+| Inventory      | Browse shared items, search by name, filter by category, and track total items and units     |
+| Administration | Add, edit, and delete manager accounts; add and delete inventory categories and items        |
+| Accounts       | Create an account, sign in, change a password, and log out                                   |
+| Experience     | Responsive layouts, persistent light/dark mode, protected routes, and task summaries         |
 
-## UI highlights
+## Roles and permissions
 
-- Calm, responsive workspace layout for desktop and mobile
-- Light and dark themes with persistent user preference
-- Dashboard cards for total, open, and completed tasks
-- Clear status badges for task priority and inventory categories
-- Accessible focus states and descriptive account-menu controls
-
-## Roles
-
-| Role    | Access                                                     |
-| ------- | ---------------------------------------------------------- |
-| Admin   | Manage managers, inventory items, and inventory categories |
-| Manager | Manage personal tasks and view inventory                   |
-| User    | Manage personal tasks                                      |
+| Role    | Access                                                                           |
+| ------- | -------------------------------------------------------------------------------- |
+| Admin   | Manage personal tasks, view and manage inventory, manage categories and managers |
+| Manager | Manage personal tasks and view inventory                                         |
 
 ## Quick start
 
@@ -73,33 +63,36 @@ npm run build
 
 ## Using the app
 
-1. Create an account or sign in from the login screen.
-2. Use the home dashboard to see open and completed task totals.
-3. Open **Tasks** to plan and update work.
-4. Open **Inventory** to search shared resources. Admins can add items and categories.
-5. Use the account menu to open **Profile**, update a password, or log out.
-6. Use the theme control in the navigation bar to switch between light and dark mode.
+1. Create an account from the login screen and choose either the `admin` or `manager` role, or sign in to an existing account.
+2. Use **Home** for a summary of all, open, and completed tasks.
+3. Open **Tasks** to create and update your personal task list.
+4. Open **Inventory** to browse shared resources. Admins can add, edit, and delete items and categories.
+5. Admins can open **Admin** to add, edit, or delete manager accounts.
+6. Use the account menu to open **Profile**, change a password, or log out.
+7. Use the theme control in the navigation bar to switch between light and dark mode.
 
-All application data is stored in the browser using `localStorage`. Task data is separated by username, while inventory data is shared in the current browser.
+All application data is stored in the browser using `localStorage`. Tasks are separated by username. Users, inventory items, and inventory categories are shared within the current browser.
 
 ## Routes
 
-| Route        | Purpose                       |
-| ------------ | ----------------------------- |
-| `/login`     | Sign in or create an account  |
-| `/home`      | Dashboard and task summary    |
-| `/tasks`     | Personal task management      |
-| `/inventory` | Shared inventory management   |
-| `/profile`   | Account and password settings |
-| `/admin`     | Admin-only manager management |
+| Route        | Purpose                                      |
+| ------------ | -------------------------------------------- |
+| `/login`     | Sign in or create an account                 |
+| `/`          | Home dashboard for signed-in users           |
+| `/intro`     | Signed-in workspace overview                 |
+| `/home`      | Dashboard and task summary                   |
+| `/tasks`     | Personal task management                     |
+| `/inventory` | Shared inventory browsing and administration |
+| `/profile`   | Account and password settings                |
+| `/admin`     | Admin-only manager management                |
 
 ## Project structure
 
 ```text
 src/
-  components/   Reusable UI components and task controls
+  components/   Reusable navigation, authentication, and task components
   context/      Auth, task, and theme state providers
-  hooks/        Shared React hooks
+  hooks/        Shared context hooks
   pages/        Route-level views
   styles/       Page-specific stylesheets
   assets/       Static application assets
@@ -108,7 +101,7 @@ src/
 ## Technology
 
 - [React 19](https://react.dev/)
-- [Vite](https://vitejs.dev/)
+- [Vite 7](https://vitejs.dev/)
 - [React Router](https://reactrouter.com/)
 - [UUID](https://www.npmjs.com/package/uuid)
 - Browser `localStorage`
@@ -125,10 +118,10 @@ npm run preview   # Preview the production build
 
 ## Limitations
 
-- This is a browser-only demo with no backend or remote synchronization.
+- This is a browser-only app with no backend or remote synchronization.
 - Data is tied to the current browser and can be cleared with browser storage.
-- Demo passwords are stored in `localStorage`; do not use real credentials.
-- The first account can select the admin role during sign-up for local testing.
+- Passwords are stored in `localStorage`; do not use real credentials.
+- Role selection is available during sign-up for local testing; there is no server-side authorization.
 
 ## Contributing
 

@@ -1399,6 +1399,69 @@ body.dark .auth-eyebrow {
   outline-offset: 1px;
 }
 
+.signup-role {
+  margin: 0.1rem 0 0.25rem;
+}
+
+.signup-role p {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.signup-role-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.signup-role-options button {
+  min-height: 2.75rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.signup-role-options button:hover {
+  border-color: #0f766e;
+  background: var(--accent-soft);
+  color: #0f766e;
+  box-shadow: 0 5px 12px rgba(15, 118, 110, 0.14);
+  filter: none;
+}
+
+.signup-role-options button.selected {
+  border-color: #0f766e;
+  background: #0f766e;
+  color: white;
+  box-shadow: 0 5px 12px rgba(15, 118, 110, 0.2);
+}
+
+.signup-role-options button.selected:hover {
+  background: #115e59;
+  color: white;
+}
+
+body.dark .signup-role-options button:hover {
+  color: #5eead4;
+}
+
+body.dark .signup-role-options button.selected:hover {
+  color: white;
+}
+
 .auth-form > button[type="submit"] {
   margin-top: 0.35rem;
   padding: 0.8rem 1rem;
