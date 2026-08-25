@@ -1,12 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../hooks/useAuth";
 
-const TaskContext = createContext();
-
-export function useTasks() {
-  return useContext(TaskContext);
-}
+// eslint-disable-next-line react-refresh/only-export-components
+export const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
   const { user } = useAuth();
@@ -29,7 +26,7 @@ export function TaskProvider({ children }) {
     text,
     dueDate = null,
     taskType = "develop",
-    priority = "normal"
+    priority = "normal",
   ) {
     setTasks([
       ...tasks,
@@ -50,15 +47,15 @@ export function TaskProvider({ children }) {
 
   function toggleTask(id) {
     setTasks(
-      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
     );
   }
 
   function updateTask(id, updatedFields) {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === id ? { ...task, ...updatedFields } : task
-      )
+        task.id === id ? { ...task, ...updatedFields } : task,
+      ),
     );
   }
 

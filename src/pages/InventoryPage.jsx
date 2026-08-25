@@ -14,7 +14,7 @@ function InventoryPage() {
 
     localStorage.setItem(
       "inventoryCategories-shared",
-      JSON.stringify(defaultCategories)
+      JSON.stringify(defaultCategories),
     );
     return defaultCategories;
   });
@@ -42,14 +42,14 @@ function InventoryPage() {
   useEffect(() => {
     localStorage.setItem(
       "inventoryData-shared",
-      JSON.stringify(inventoryItems)
+      JSON.stringify(inventoryItems),
     );
   }, [inventoryItems]);
 
   useEffect(() => {
     localStorage.setItem(
       "inventoryCategories-shared",
-      JSON.stringify(categories)
+      JSON.stringify(categories),
     );
   }, [categories]);
 
@@ -86,26 +86,49 @@ function InventoryPage() {
     if (!isAdmin) return;
     setInventoryItems((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, ...editingValues } : item
-      )
+        item.id === id ? { ...item, ...editingValues } : item,
+      ),
     );
     setEditingId(null);
   };
 
   const filteredItems = inventoryItems.filter(
     (item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (filterCategory ? item.category === filterCategory : true)
+      `${item.name} ${item.category}`
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) &&
+      (filterCategory ? item.category === filterCategory : true),
   );
+  const totalQuantity = inventoryItems.reduce(
+    (total, item) => total + (Number(item.quantity) || 0),
+    0,
+  );
+  const hasFilters = searchTerm || filterCategory;
 
   return (
     <div className="inventory-container">
-      <h2>Inventory Management</h2>
+      <div className="inventory-heading">
+        <div>
+          <p className="inventory-eyebrow">Shared resources</p>
+          <h2>Inventory management</h2>
+          <p className="inventory-subtitle">
+            Keep equipment visible, organized, and ready to use.
+          </p>
+        </div>
+        <div className="inventory-summary" aria-label="Inventory summary">
+          <div>
+            <strong>{inventoryItems.length}</strong>
+            <span>Items</span>
+          </div>
+          <div>
+            <strong>{totalQuantity}</strong>
+            <span>Units</span>
+          </div>
+        </div>
+      </div>
 
       {!isAdmin && (
-        <p style={{ color: "#888", marginBottom: "1rem" }}>
-          Only admins can modify inventory.
-        </p>
+        <p className="inventory-notice">Only admins can modify inventory.</p>
       )}
 
       <div className="inventory-filters">
@@ -128,6 +151,18 @@ function InventoryPage() {
             </option>
           ))}
         </select>
+        {hasFilters && (
+          <button
+            type="button"
+            className="inventory-clear"
+            onClick={() => {
+              setSearchTerm("");
+              setFilterCategory("");
+            }}
+          >
+            Clear filters
+          </button>
+        )}
       </div>
 
       {isAdmin && (
@@ -173,8 +208,18 @@ function InventoryPage() {
 
       {isAdmin && (
         <div className="category-management">
-          <h4>Manage Categories</h4>
+          <div className="category-heading">
+            <div>
+              <p className="category-eyebrow">Inventory structure</p>
+              <h4>Manage Categories</h4>
+            </div>
+            <span className="category-count">
+              {categories.length}{" "}
+              {categories.length === 1 ? "category" : "categories"}
+            </span>
+          </div>
           <form
+            className="category-form"
             onSubmit={(e) => {
               e.preventDefault();
               const trimmed = newCategory.trim().toLowerCase();
@@ -207,10 +252,13 @@ function InventoryPage() {
                     setCategories((prev) => prev.filter((c) => c !== cat));
                     setInventoryItems((prev) =>
                       prev.map((item) =>
-                        item.category === cat ? { ...item, category: "" } : item
-                      )
+                        item.category === cat
+                          ? { ...item, category: "" }
+                          : item,
+                      ),
                     );
                   }}
+                  aria-label={`Delete ${cat} category`}
                   title="Delete category"
                 >
                   🗑
@@ -220,6 +268,10 @@ function InventoryPage() {
           </ul>
         </div>
       )}
+
+      <p className="inventory-results">
+        Showing {filteredItems.length} of {inventoryItems.length} items
+      </p>
 
       <ul className="inventory-list">
         {filteredItems.length === 0 ? (
@@ -283,8 +335,16 @@ function InventoryPage() {
                 </>
               ) : (
                 <>
-                  <strong>{item.name}</strong> ({item.quantity}) -{" "}
-                  {item.category || "Uncategorized"}
+                  <div className="inventory-item-content">
+                    <strong>{item.name}</strong>
+                    <span className="inventory-quantity">
+                      {item.quantity}{" "}
+                      {Number(item.quantity) === 1 ? "unit" : "units"}
+                    </span>
+                    <span className="inventory-category">
+                      {item.category || "Uncategorized"}
+                    </span>
+                  </div>
                   {isAdmin && (
                     <div className="item-actions">
                       <button

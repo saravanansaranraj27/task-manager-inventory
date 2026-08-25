@@ -14,6 +14,7 @@ import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import Login from "./components/Login";
 import Home from "./pages/Home";
+import Intro from "./pages/Intro";
 import Profile from "./pages/Profile";
 import Tasks from "./pages/Tasks";
 import AdminPanel from "./pages/AdminPanel";
@@ -43,6 +44,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/intro"
+        element={
+          <ProtectedRoute>
+            <Intro />
           </ProtectedRoute>
         }
       />
@@ -90,9 +99,9 @@ function AppContent() {
   return (
     <>
       <Navbar showMinimal={!showNavbar} />
-      <div className="app-container">
+      <main className="app-shell">
         <AppRoutes />
-      </div>
+      </main>
     </>
   );
 }

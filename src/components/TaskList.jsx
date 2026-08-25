@@ -1,4 +1,4 @@
-import { useTasks } from "../context/TaskContext";
+import { useTasks } from "../hooks/useTasks";
 import TaskItem from "./TaskItem";
 
 function TaskList() {

@@ -1,75 +1,138 @@
 # Task Manager
 
-Task Manager is a modern web application for managing tasks and inventory with role-based access control. Built with React and Vite, it supports multiple user roles (admin, manager, user), authentication, and persistent data storage in the browser.
+> A focused workspace for organizing personal tasks, shared equipment, and team access.
 
-## Features
+[![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-0f766e.svg)](#license)
 
-- **User Authentication**: Sign up, log in, and log out with local storage persistence.
-- **Role-Based Access**:
-  - **Admin**: Manage all users, add/remove managers, and control inventory categories/items.
-  - **Manager**: Manage their own tasks and view inventory.
-  - **User**: Manage personal tasks.
-- **Task Management**:
-  - Add, edit, delete, and complete tasks.
-  - Set due dates, priorities, and task types.
-  - Tasks are saved per user in local storage.
-- **Inventory Management** (Admin only):
-  - Add, edit, delete inventory items and categories.
-  - Filter and search inventory.
-- **Theming**: Light and dark mode toggle.
-- **Responsive UI**: Clean, modern interface for desktop and mobile.
+Task Manager is a responsive React application built for small teams that need a simple way to plan work and manage inventory. It uses role-based access control and browser storage, so it works without a backend or account setup.
 
-## Technologies Used
+## Contents
+
+- [What is included](#what-is-included)
+- [UI highlights](#ui-highlights)
+- [Roles](#roles)
+- [Quick start](#quick-start)
+- [Using the app](#using-the-app)
+- [Routes](#routes)
+- [Project structure](#project-structure)
+- [Technology](#technology)
+- [Development commands](#development-commands)
+- [Limitations](#limitations)
+- [Contributing](#contributing)
+- [License](#license)
+
+## What is included
+
+| Area        | Capabilities                                                                                   |
+| ----------- | ---------------------------------------------------------------------------------------------- |
+| Tasks       | Create, edit, complete, and remove tasks with due dates, types, and priorities                 |
+| Inventory   | Search by name or category, filter results, track quantities, and manage categories            |
+| Accounts    | Sign up, log in, update passwords, and log out                                                 |
+| Permissions | Admin, manager, and user roles with protected routes                                           |
+| Experience  | Responsive layouts, persistent light/dark mode, keyboard-friendly controls, and task summaries |
+
+## UI highlights
+
+- Calm, responsive workspace layout for desktop and mobile
+- Light and dark themes with persistent user preference
+- Dashboard cards for total, open, and completed tasks
+- Clear status badges for task priority and inventory categories
+- Accessible focus states and descriptive account-menu controls
+
+## Roles
+
+| Role    | Access                                                     |
+| ------- | ---------------------------------------------------------- |
+| Admin   | Manage managers, inventory items, and inventory categories |
+| Manager | Manage personal tasks and view inventory                   |
+| User    | Manage personal tasks                                      |
+
+## Quick start
+
+### Requirements
+
+- Node.js 18 or newer
+- npm
+
+### Run locally
+
+```sh
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+To create a production build:
+
+```sh
+npm run build
+```
+
+## Using the app
+
+1. Create an account or sign in from the login screen.
+2. Use the home dashboard to see open and completed task totals.
+3. Open **Tasks** to plan and update work.
+4. Open **Inventory** to search shared resources. Admins can add items and categories.
+5. Use the account menu to open **Profile**, update a password, or log out.
+6. Use the theme control in the navigation bar to switch between light and dark mode.
+
+All application data is stored in the browser using `localStorage`. Task data is separated by username, while inventory data is shared in the current browser.
+
+## Routes
+
+| Route        | Purpose                       |
+| ------------ | ----------------------------- |
+| `/login`     | Sign in or create an account  |
+| `/home`      | Dashboard and task summary    |
+| `/tasks`     | Personal task management      |
+| `/inventory` | Shared inventory management   |
+| `/profile`   | Account and password settings |
+| `/admin`     | Admin-only manager management |
+
+## Project structure
+
+```text
+src/
+  components/   Reusable UI components and task controls
+  context/      Auth, task, and theme state providers
+  hooks/        Shared React hooks
+  pages/        Route-level views
+  styles/       Page-specific stylesheets
+  assets/       Static application assets
+```
+
+## Technology
 
 - [React 19](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 - [React Router](https://reactrouter.com/)
-- [UUID](https://www.npmjs.com/package/uuid) for unique IDs
-- Local Storage for persistence
-- Custom React Context for state management
+- [UUID](https://www.npmjs.com/package/uuid)
+- Browser `localStorage`
+- React Context for shared state
 
-## Getting Started
+## Development commands
 
-### Prerequisites
+```sh
+npm run dev       # Start the development server
+npm run build     # Create a production build
+npm run lint      # Run ESLint
+npm run preview   # Preview the production build
+```
 
-- Node.js (v18 or newer recommended)
-- npm
+## Limitations
 
-### Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/task-manager.git
-   cd task-manager
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the development server:
-   ```sh
-   npm run dev
-   ```
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-## Usage
-
-- **Sign up** as a new user. The first user can be an admin (edit in code or local storage for demo).
-- **Admins** can add managers and manage inventory.
-- **Managers/Users** can manage their own tasks.
-- All data is stored in your browser (no backend required).
-
-## Project Structure
-
-- `src/components/` – Reusable UI components (Navbar, TaskForm, TaskList, etc.)
-- `src/context/` – React Contexts for Auth, Tasks, and Theme
-- `src/pages/` – Main app pages (Home, Tasks, AdminPanel, InventoryPage, Profile)
-- `src/hooks/` – Custom hooks
-- `src/styles/` – CSS files
+- This is a browser-only demo with no backend or remote synchronization.
+- Data is tied to the current browser and can be cleared with browser storage.
+- Demo passwords are stored in `localStorage`; do not use real credentials.
+- The first account can select the admin role during sign-up for local testing.
 
 ## Contributing
 
-Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
+Bug reports, improvements, and pull requests are welcome. Please keep changes focused and verify them with the available build and lint commands.
 
 ## License
 

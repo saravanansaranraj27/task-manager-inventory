@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTheme() {
   return useContext(ThemeContext);
 }
@@ -14,7 +15,7 @@ export function ThemeProvider(props) {
       document.body.classList.remove("light", "dark");
       document.body.classList.add(theme);
     },
-    [theme]
+    [theme],
   );
 
   function toggleTheme() {

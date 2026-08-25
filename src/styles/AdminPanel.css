@@ -2,13 +2,25 @@
   padding: 2.5rem 2rem;
   background: linear-gradient(135deg, #f8fafc 60%, #e0e7ff 100%);
   border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(30, 41, 59, 0.12),
+  box-shadow:
+    0 8px 32px rgba(30, 41, 59, 0.12),
     0 1.5px 6px rgba(30, 41, 59, 0.06);
   max-width: 650px;
   margin: 2.5rem auto;
   color: #1e293b;
   font-family: "Segoe UI", "Roboto", Arial, sans-serif;
   transition: background 0.3s;
+}
+
+.admin-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  color: var(--text);
 }
 
 body.dark .admin-panel {
@@ -26,6 +38,12 @@ body.dark .admin-panel {
   text-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
 }
 
+.admin-panel h2 {
+  color: var(--text);
+  text-align: left;
+  text-shadow: none;
+}
+
 .admin-form {
   display: flex;
   flex-wrap: wrap;
@@ -37,6 +55,15 @@ body.dark .admin-panel {
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.04);
 }
 
+.admin-form {
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-muted);
+  box-shadow: none;
+}
+
 .admin-form input {
   flex: 1;
   padding: 0.7rem 1rem;
@@ -45,12 +72,19 @@ body.dark .admin-panel {
   background: #f8fafc;
   color: #1e293b;
   font-size: 1rem;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
   outline: none;
 }
 .admin-form input:focus {
   border: 1.5px solid #2563eb;
   box-shadow: 0 0 0 2px #2563eb22;
+}
+
+.admin-form input:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.14);
 }
 
 body.dark .admin-form input {
@@ -69,7 +103,9 @@ body.dark .admin-form input {
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-  transition: background 0.3s, box-shadow 0.2s;
+  transition:
+    background 0.3s,
+    box-shadow 0.2s;
 }
 .admin-form button:focus {
   outline: 2px solid #2563eb;
@@ -81,10 +117,27 @@ body.dark .admin-form input {
   box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
 }
 
+.admin-form button,
+.manager-item button {
+  background: #0f766e;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.admin-form button:hover,
+.manager-item button:hover {
+  background: #115e59;
+  box-shadow: none;
+}
+
 .manager-list {
   list-style: none;
   padding: 0;
   margin-top: 1.5rem;
+}
+
+.manager-list {
+  margin-top: 1rem;
 }
 
 .manager-item {
@@ -101,6 +154,16 @@ body.dark .admin-form input {
   transition: background 0.3s;
 }
 
+.manager-item {
+  margin-bottom: 0.65rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: none;
+  color: var(--text);
+}
+
 body.dark .manager-item {
   background: linear-gradient(90deg, #334155 80%, #1e293b 100%);
   color: #f1f5f9;
@@ -113,7 +176,9 @@ body.dark .manager-item {
   background: #f8fafc;
   color: #1e293b;
   font-size: 1rem;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
   outline: none;
 }
 .manager-item input:focus {
@@ -137,7 +202,9 @@ body.dark .manager-item input {
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-  transition: background 0.3s, box-shadow 0.2s;
+  transition:
+    background 0.3s,
+    box-shadow 0.2s;
 }
 .manager-item button:focus {
   outline: 2px solid #2563eb;
@@ -157,4 +224,78 @@ body.dark .manager-item input {
 .manager-item button:nth-child(4):hover,
 .manager-item .delete-button:hover {
   background: linear-gradient(90deg, #b91c1c 60%, #dc2626 100%);
+}
+
+.admin-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-heading h2 {
+  margin: 0;
+}
+
+.admin-count {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.admin-count {
+  border-color: rgba(15, 118, 110, 0.25);
+  background: var(--accent-soft);
+  color: #0f766e;
+}
+
+.admin-message {
+  margin: -1rem 0 1.25rem;
+  color: #0f766e;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+body.dark .admin-message {
+  color: #5eead4;
+}
+
+.manager-item .delete-button {
+  background: linear-gradient(90deg, #dc2626 60%, #f87171 100%);
+}
+
+.manager-item .delete-button:hover {
+  background: linear-gradient(90deg, #b91c1c 60%, #dc2626 100%);
+}
+
+.manager-item .delete-button {
+  background: transparent;
+  color: #b45309;
+}
+
+.manager-item .delete-button:hover {
+  background: #fffbeb;
+  color: #92400e;
+}
+
+@media (max-width: 560px) {
+  .admin-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .manager-item {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .manager-item button,
+  .manager-item input {
+    flex: 1;
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTasks } from "../context/TaskContext";
+import { useTasks } from "../hooks/useTasks";
 
 function TaskItem({ task }) {
   const [isEditing, setIsEditing] = useState(false);

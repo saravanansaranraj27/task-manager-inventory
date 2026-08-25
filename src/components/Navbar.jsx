@@ -26,9 +26,9 @@ function Navbar({ showMinimal = false }) {
   }, []);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Primary navigation">
       <div className="nav-left">
-        <Link to="/home" className="logo">
+        <Link to="/intro" className="logo">
           Task Manager
         </Link>
         {!showMinimal && (
@@ -55,7 +55,11 @@ function Navbar({ showMinimal = false }) {
       </div>
 
       <div className="nav-right">
-        <button onClick={toggleTheme} className="theme-toggle">
+        <button
+          onClick={toggleTheme}
+          className="theme-toggle"
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        >
           {theme === "light" ? "🌙 Dark" : "☀️ Light"}
         </button>
 
@@ -64,20 +68,44 @@ function Navbar({ showMinimal = false }) {
             <button
               className="dropdown-toggle"
               onClick={() => setShowDropdown((prev) => !prev)}
+              aria-expanded={showDropdown}
+              aria-haspopup="menu"
             >
-              👤 {user.username}
+              <span className="user-avatar" aria-hidden="true">
+                {user.username.charAt(0).toUpperCase()}
+              </span>
+              <span>{user.username}</span>
+              <span className="dropdown-chevron" aria-hidden="true">
+                {showDropdown ? "⌃" : "⌄"}
+              </span>
             </button>
             {showDropdown && (
-              <div className="dropdown-menu">
+              <div className="dropdown-menu" role="menu">
+                <div className="dropdown-header">
+                  <strong>{user.username}</strong>
+                  <span>{user.role}</span>
+                </div>
                 <button
+                  type="button"
+                  role="menuitem"
+                  className="dropdown-item"
                   onClick={() => {
                     navigate("/profile");
                     setShowDropdown(false);
                   }}
                 >
+                  <span aria-hidden="true">◉</span>
                   Profile
                 </button>
-                <button onClick={handleLogout}>Logout</button>
+                <button
+                  type="button"
+                  role="menuitem"
+                  className="dropdown-item dropdown-logout"
+                  onClick={handleLogout}
+                >
+                  <span aria-hidden="true">↪</span>
+                  Log out
+                </button>
               </div>
             )}
           </div>

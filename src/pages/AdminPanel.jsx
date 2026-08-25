@@ -8,6 +8,7 @@ function AdminPanel() {
   const [password, setPassword] = useState("");
   const [editingUser, setEditingUser] = useState(null);
   const [newPassword, setNewPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   function saveUsers(newUsers) {
     localStorage.setItem("users", JSON.stringify(newUsers));
@@ -18,18 +19,19 @@ function AdminPanel() {
     e.preventDefault();
     if (!username || !password) return;
     if (users.some((u) => u.username === username)) {
-      alert("User already exists");
+      setMessage("That username is already in use.");
       return;
     }
     const newUser = { username, password, role: "manager" };
     saveUsers([...users, newUser]);
     setUsername("");
     setPassword("");
+    setMessage("Manager added successfully.");
   }
 
   function handleDelete(username) {
     const updated = users.filter(
-      (u) => u.username !== username || u.role !== "manager"
+      (u) => u.username !== username || u.role !== "manager",
     );
     saveUsers(updated);
   }
@@ -41,7 +43,7 @@ function AdminPanel() {
 
   function handleUpdate(username) {
     const updated = users.map((u) =>
-      u.username === username ? { ...u, password: newPassword } : u
+      u.username === username ? { ...u, password: newPassword } : u,
     );
 
     saveUsers(updated);
@@ -54,7 +56,15 @@ function AdminPanel() {
 
   return (
     <div className="admin-panel">
-      <h2>Manage Managers</h2>
+      <div className="admin-heading">
+        <div>
+          <p className="page-eyebrow">Administration</p>
+          <h2>Manage managers</h2>
+        </div>
+        <span className="admin-count">
+          {users.filter((u) => u.role === "manager").length} active
+        </span>
+      </div>
 
       <form onSubmit={handleAdd} className="admin-form">
         <input
@@ -73,6 +83,11 @@ function AdminPanel() {
         />
         <button type="submit">Add Manager</button>
       </form>
+      {message && (
+        <p className="admin-message" role="status">
+          {message}
+        </p>
+      )}
 
       <ul className="manager-list">
         {users
@@ -94,7 +109,10 @@ function AdminPanel() {
               ) : (
                 <>
                   <button onClick={() => handleEdit(u.username)}>Edit</button>
-                  <button onClick={() => handleDelete(u.username)}>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDelete(u.username)}
+                  >
                     Delete
                   </button>
                 </>

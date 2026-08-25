@@ -27,10 +27,20 @@ function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
-      <h2>{isSignup ? "Sign Up" : "Login"}</h2>
+    <form onSubmit={handleSubmit} className="task-form auth-form">
+      <p className="auth-eyebrow">Task Manager</p>
+      <h2>{isSignup ? "Create your workspace" : "Welcome back"}</h2>
+      <p className="auth-subtitle">
+        {isSignup
+          ? "Set up your account and get organized."
+          : "Sign in to continue where you left off."}
+      </p>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && (
+        <p className="auth-error" role="alert">
+          {error}
+        </p>
+      )}
 
       <input
         type="text"
@@ -54,7 +64,7 @@ function Login() {
       )}
       <button type="submit">{isSignup ? "Sign Up" : "Login"}</button>
 
-      <p style={{ marginTop: "1rem" }}>
+      <p className="auth-switch">
         {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
         <button
           type="button"
@@ -62,12 +72,7 @@ function Login() {
             setIsSignup(!isSignup);
             setError("");
           }}
-          style={{
-            background: "none",
-            border: "none",
-            color: "#2563eb",
-            cursor: "pointer",
-          }}
+          className="auth-switch-button"
         >
           {isSignup ? "Login" : "Sign Up"}
         </button>
