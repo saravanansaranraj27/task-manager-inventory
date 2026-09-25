@@ -1,0 +1,41 @@
+import { createContext, useEffect, useState } from "react";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const ThemeContext = createContext(null);
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((current) => {
+      const nextTheme = current === "light" ? "dark" : "light";
+
+      localStorage.setItem("theme", nextTheme);
+
+      return nextTheme;
+    });
+  }
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
